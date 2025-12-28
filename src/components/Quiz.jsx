@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Button from './Button';
 import { questions } from '../data/questions';
 
-const slangs = ["Bohot Hard!", "Kya bolte public?", "Ek Number!", "Kadak!", "Full Power!", "Vibe Hai!", "Scene Set Hai!"];
+const slangs = ["Bohot Hard!", "Kya Bolti Public?", "Ek Number!", "Kadak!", "Full Power!", "Vibe Hai!", "Scene Set Hai!"];
 
 export default function Quiz({ onComplete }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
