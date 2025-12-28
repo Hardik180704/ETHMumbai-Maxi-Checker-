@@ -1,36 +1,36 @@
 export const tiers = [
   {
-    name: "Tourist",
+    name: "Gateway Gazer",
     range: [0, 20],
-    description: "You've heard of ETHMumbai, but have you tried the Vada Pav?",
+    description: "You just landed at CST. Still figuring out if 'SoBo' is a token.",
     color: "from-gray-400 to-gray-600",
     id: "tourist"
   },
   {
-    name: "Enthusiast",
+    name: "Auto-Rickshaw Analyst",
     range: [21, 40],
-    description: "You follow the updates and maybe own some ENS names.",
+    description: "You know the routes (roadmap), but the meter is always broken (gas fees).",
     color: "from-blue-400 to-blue-600",
     id: "enthusiast"
   },
   {
-    name: "Builder",
+    name: "Vada Pav Visionary",
     range: [41, 60],
-    description: "You're building something cool. Keep shipping!",
+    description: "You're building the spicy stuff. Essential fuel for the ecosystem.",
     color: "from-green-400 to-green-600",
     id: "builder"
   },
   {
-    name: "Core Contributor",
+    name: "Local Train Legend",
     range: [61, 80],
-    description: "Deep in the ecosystem. You check Etherscan for fun.",
+    description: "You survive the volatility of Dadar station daily. Unshakeable.",
     color: "from-purple-400 to-purple-600",
     id: "contributor"
   },
   {
-    name: "Maxi God",
+    name: "Web3 Dabbawala",
     range: [81, 100],
-    description: "You ARE ETHMumbai. A living legend.",
+    description: "6 Sigma Precision. You deliver blocks perfectly, rain or shine.",
     color: "from-orange-400 to-pink-600", // Mumbai sunset / ETH colors
     id: "maxi"
   }

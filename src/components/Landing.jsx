@@ -38,9 +38,10 @@ export default function Landing({ onStart }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-300 max-w-lg mx-auto md:mx-0 leading-relaxed"
+            className="text-lg md:text-xl text-slate-300 max-w-lg mx-auto md:mx-0 leading-relaxed font-medium"
           >
-            From Local Trains to L2 Chains. Test your knowledge of the city that never sleep and the builders who never stop shipping.
+            "Train rukne ke baad uthroge kya?" <br/>
+            Start early, build hard. Test your gyaan of the city that runs on Vada Pav and Smart Contracts.
           </motion.p>
 
           <motion.div 
@@ -49,13 +50,13 @@ export default function Landing({ onStart }) {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4"
           >
-            <Button onClick={onStart} variant="primary" className="shadow-mumbai-pink/25 shadow-xl">
+            <Button onClick={onStart} variant="primary" className="shadow-mumbai-pink/25 shadow-xl uppercase tracking-widest">
               <Train className="w-5 h-5" />
-              Start The Journey
+              Pakad Local (Start)
             </Button>
-            <Button variant="secondary" onClick={() => alert("Wallet connection coming soon!")}>
+            <Button variant="secondary" onClick={() => alert("Wallet connection lines are busy, try again later via Sea Link!")}>
               <Wallet className="w-5 h-5" />
-              Connect Wallet
+              Jod Wallet
             </Button>
           </motion.div>
 
