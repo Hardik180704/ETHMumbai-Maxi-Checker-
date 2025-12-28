@@ -1,79 +1,109 @@
 import { motion } from 'framer-motion';
-import { Train, Wallet } from 'lucide-react';
+import { Train, Wallet, ArrowRight } from 'lucide-react';
 import Button from './Button';
 
 export default function Landing({ onStart }) {
   return (
-    <div className="flex flex-col items-center text-center space-y-8 max-w-2xl animate-fade-in relative z-20">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] w-full max-w-6xl mx-auto px-4 relative z-20">
       
-      {/* Hero Badge */}
-      <motion.div 
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="inline-block bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 text-mumbai-orange font-semibold text-sm mb-4"
-      >
-        🌟 The Ultimate Ethereum Mumbai Quiz
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
+        
+        {/* Left Content */}
+        <div className="text-center md:text-left space-y-8 order-2 md:order-1">
+          <motion.div 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="inline-flex items-center gap-2 bg-mumbai-orange/10 backdrop-blur-md px-4 py-2 rounded-full border border-mumbai-orange/20 text-mumbai-orange font-bold text-sm tracking-wide uppercase"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-mumbai-orange opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-mumbai-orange"></span>
+            </span>
+            ETHMumbai 2024 Edition
+          </motion.div>
 
-      {/* Main Title */}
-      <motion.h1 
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.1 }}
-        className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-mumbai-orange via-mumbai-pink to-mumbai-yellow tracking-tight"
-      >
-        ETHMumbai <br/>
-        <span className="text-white">Maxi Checker</span>
-      </motion.h1>
+          <motion.h1 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-7xl font-black leading-tight tracking-tight"
+          >
+            <span className="text-white drop-shadow-lg">Aamchi</span>{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-mumbai-orange via-mumbai-pink to-purple-600">
+              Web3 Mumbai
+            </span>
+          </motion.h1>
 
-      <motion.p 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-xl text-slate-300 px-4"
-      >
-        Are you a tourist, a builder, or a certified <b>Maxi God</b>? <br/>
-        Test your knowledge of Ethereum, Mumbai, and the local ecosystem.
-      </motion.p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-slate-300 max-w-lg mx-auto md:mx-0 leading-relaxed"
+          >
+            From Local Trains to L2 Chains. Test your knowledge of the city that never sleep and the builders who never stop shipping.
+          </motion.p>
 
-      {/* Interactive Elements */}
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="flex flex-col sm:flex-row gap-4 w-full justify-center pt-8"
-      >
-        <Button onClick={onStart} variant="primary">
-          <Train className="w-5 h-5" />
-          Start Quiz
-        </Button>
-        <Button variant="secondary" onClick={() => alert("Wallet connection coming soon!")}>
-          <Wallet className="w-5 h-5" />
-          Connect Wallet (+10 XP)
-        </Button>
-      </motion.div>
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4"
+          >
+            <Button onClick={onStart} variant="primary" className="shadow-mumbai-pink/25 shadow-xl">
+              <Train className="w-5 h-5" />
+              Start The Journey
+            </Button>
+            <Button variant="secondary" onClick={() => alert("Wallet connection coming soon!")}>
+              <Wallet className="w-5 h-5" />
+              Connect Wallet
+            </Button>
+          </motion.div>
 
-      {/* Stats / Social Proof */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="grid grid-cols-3 gap-8 pt-12 text-slate-500 text-sm font-medium"
-      >
-        <div>
-          <span className="block text-2xl font-bold text-white">15</span>
-          Questions
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex items-center justify-center md:justify-start gap-8 text-slate-500 text-xs font-bold uppercase tracking-widest pt-8"
+          >
+             <div className="flex items-center gap-2">
+               <div className="w-1 h-1 bg-slate-500 rounded-full"></div>
+               15 Questions
+             </div>
+             <div className="flex items-center gap-2">
+               <div className="w-1 h-1 bg-slate-500 rounded-full"></div>
+               5 Maxi Tiers
+             </div>
+             <div className="flex items-center gap-2">
+               <div className="w-1 h-1 bg-slate-500 rounded-full"></div>
+               POAP Rewards
+             </div>
+          </motion.div>
         </div>
-        <div>
-          <span className="block text-2xl font-bold text-white">5</span>
-          Tiers
-        </div>
-        <div>
-          <span className="block text-2xl font-bold text-white">∞</span>
-          Vibes
-        </div>
-      </motion.div>
 
+        {/* Right Hero Image */}
+        <motion.div 
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="order-1 md:order-2 relative"
+        >
+          <div className="relative z-10 rounded-3xl overflow-hidden border-4 border-white/10 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+            <img 
+              src="/mumbai-hero.jpg" 
+              alt="ETHMumbai Hero Art" 
+              className="w-full h-auto object-cover"
+            />
+            
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+          </div>
+
+          {/* Decorative Backdrops */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-mumbai-orange to-mumbai-pink rounded-3xl blur-2xl opacity-30 -z-10"></div>
+          
+        </motion.div>
+
+      </div>
     </div>
   );
 }
