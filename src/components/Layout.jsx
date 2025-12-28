@@ -1,6 +1,10 @@
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans selection:bg-mumbai-pink selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-slate-900 text-white font-sans selection:bg-mumbai-pink selection:text-white overflow-x-hidden relative">
+      
+      {/* Kaali-Peeli Taxi Pattern Top Border */}
+      <div className="fixed top-0 left-0 w-full h-2 z-50 bg-pattern-taxi opacity-80"></div>
+
       <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none z-0"></div>
       <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 z-0 pointer-events-none"></div>
       
@@ -8,8 +12,10 @@ export default function Layout({ children }) {
         {children}
       </main>
       
-      <footer className="relative z-10 w-full text-center py-4 text-slate-500 text-sm">
-        <p>Made with ❤️ for ETHMumbai</p>
+      <footer className="relative z-10 w-full text-center py-6 text-slate-500 text-sm font-medium">
+        <p className="flex items-center justify-center gap-2">
+          Made with <span className="text-mumbai-orange animate-pulse">Vada Pav</span> & Code for ETHMumbai
+        </p>
       </footer>
     </div>
   );

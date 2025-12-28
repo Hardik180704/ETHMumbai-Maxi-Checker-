@@ -7,3 +7,18 @@
     @apply bg-slate-900 text-white overflow-x-hidden;
   }
 }
+
+/* Custom Mumbai Vibe Utils */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+}
+
+.text-stroke-black {
+  -webkit-text-stroke: 2px black;
+}
+
+.bg-pattern-taxi {
+  background-image: repeating-linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), repeating-linear-gradient(45deg, #111 25%, #FFCC00 25%, #FFCC00 75%, #111 75%, #111);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}

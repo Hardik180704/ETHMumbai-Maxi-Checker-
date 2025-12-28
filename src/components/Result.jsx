@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import html2canvas from 'html2canvas';
 import confetti from 'canvas-confetti';
-import { Download, RotateCcw, Share2 } from 'lucide-react';
+import { Download, RotateCcw, Share2, Ticket } from 'lucide-react';
 import Button from './Button';
 import MaxiCard from './MaxiCard';
 import { getTier } from '../data/tiers';
@@ -76,7 +76,7 @@ export default function Result({ scoreData, onRestart }) {
       const image = canvas.toDataURL("image/png");
       const link = document.createElement('a');
       link.href = image;
-      link.download = "ethmumbai-maxi-" + scoreData.score + ".png";
+      link.download = "ethmumbai-pass-" + scoreData.score + ".png";
       link.click();
     } catch (err) {
       console.error("Failed to generate card", err);
@@ -86,11 +86,11 @@ export default function Result({ scoreData, onRestart }) {
     }
   };
 
-  const shareText = "I just scored " + scoreData.percentage + "% on the ETHMumbai Maxi Checker and got the rank: " + tier.name + "! 🚀\n\nAre you a Tourist or a Maxi God? Check it out! #ETHMumbai #Web3";
+  const shareText = "Kya baat hai! Scored " + scoreData.percentage + "% on the ETHMumbai Maxi Checker. I am officially a " + tier.name + "! 🇮🇳✨\n\nCheck your Web3 Mumbai gyaan here: [Link]"; // Add actual link later
   const shareUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText);
 
   return (
-    <div className="flex flex-col items-center w-full max-w-4xl mx-auto animate-fade-in pb-12">
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto animate-fade-in pb-12 relative z-20">
       
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -98,17 +98,25 @@ export default function Result({ scoreData, onRestart }) {
         transition={{ type: "spring", bounce: 0.5 }}
         className="text-center mb-8"
       >
-        <p className="text-slate-400 uppercase tracking-widest font-bold mb-2">Quiz Complete</p>
-        <h1 className="text-5xl md:text-7xl font-black text-white mb-4">
+        <p className="inline-block bg-mumbai-yellow text-black font-bold px-3 py-1 -rotate-2 rounded uppercase tracking-widest text-xs mb-4">
+           Exam Result Declared!
+        </p>
+        <h1 className="text-5xl md:text-7xl font-black text-white mb-2 tracking-tighter">
           <span className={`bg-clip-text text-transparent bg-gradient-to-r ${tier.color}`}>
             {tier.name}
           </span>
         </h1>
-        <p className="text-xl text-slate-300">You scored {scoreData.score} / {scoreData.total} ({scoreData.percentage}%)</p>
+        <p className="text-xl text-slate-300">
+           Score: {scoreData.score} / {scoreData.total} <span className="text-mumbai-orange">({scoreData.percentage}%)</span>
+        </p>
       </motion.div>
 
       {/* Card Preview Area */}
       <div className="relative mb-8 group perspective-1000">
+         <div className="absolute -top-6 -right-6 z-30 animate-bounce">
+            <span className="bg-white text-black font-bold px-3 py-1 rounded-full text-xs shadow-lg">New Pass! 🎟️</span>
+         </div>
+
         <motion.div
            initial={{ rotateX: 10, opacity: 0 }}
            animate={{ rotateX: 0, opacity: 1 }}
@@ -127,14 +135,19 @@ export default function Result({ scoreData, onRestart }) {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="w-full max-w-md mb-12 bg-white/5 border border-white/10 rounded-2xl p-6"
+        className="w-full max-w-md mb-12 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md"
       >
-        <h3 className="text-xl font-bold mb-4 text-center">🏆 Past High Scores</h3>
+        <h3 className="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2">
+           <span>🏆</span> Hall of Fame
+        </h3>
         <div className="space-y-2">
           {highScores.map((s, i) => (
             <div key={i} className="flex justify-between items-center text-slate-300 text-sm border-b border-white/5 last:border-0 pb-2 last:pb-0">
-              <span>{i+1}. {s.tier}</span>
-              <span className="font-mono font-bold text-mumbai-orange">{s.score} pts</span>
+              <span className="flex items-center gap-2">
+                 <span className="font-mono opacity-50">#{i+1}</span>
+                 {s.tier}
+              </span>
+              <span className="font-bold text-mumbai-orange">{s.score} pts</span>
             </div>
           ))}
           {highScores.length === 0 && <p className="text-center text-slate-500">No scores yet. Be the first!</p>}
@@ -144,13 +157,13 @@ export default function Result({ scoreData, onRestart }) {
       <div className="flex flex-col sm:flex-row gap-4 z-20 -mt-24 sm:-mt-20 md:mt-0">
         <Button onClick={handleDownload} variant="primary">
           <Download className="w-5 h-5" />
-          {isGenerating ? "Minting..." : "Download Card"}
+          {isGenerating ? "Printing Ticket..." : "Download Pass"}
         </Button>
         
         <a href={shareUrl} target="_blank" rel="noopener noreferrer">
-          <Button variant="secondary" className="w-full">
+          <Button variant="secondary" className="w-full text-[#1DA1F2] hover:bg-[#1DA1F2]/10">
             <Share2 className="w-5 h-5" />
-            Share on X
+            Flex on X
           </Button>
         </a>
 

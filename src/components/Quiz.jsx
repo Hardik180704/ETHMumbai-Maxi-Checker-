@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Button from './Button';
 import { questions } from '../data/questions';
 
+const slangs = ["Bohot Hard!", "Kya bolte public?", "Ek Number!", "Kadak!", "Full Power!", "Vibe Hai!", "Scene Set Hai!"];
+
 export default function Quiz({ onComplete }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { questionId: selectedIndex }
   const [score, setScore] = useState(0);
   const [showExplanation, setShowExplanation] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [toast, setToast] = useState(null);
 
   const currentQuestion = questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -18,24 +21,24 @@ export default function Quiz({ onComplete }) {
     setSelectedOption(index);
     setShowExplanation(true);
     
-    // Calculate score immediately or store for later? 
-    // Let's store answer and calculate at end or incrementally.
     const isCorrect = index === currentQuestion.correctIndex;
     if (isCorrect) {
       setScore(prev => prev + 1);
+      setToast(slangs[Math.floor(Math.random() * slangs.length)]);
     }
 
     setAnswers(prev => ({ ...prev, [currentQuestion.id]: index }));
   };
 
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   const handleNext = () => {
     if (isLastQuestion) {
-      const finalScorePercentage = Math.round(((score + (selectedOption === currentQuestion.correctIndex ? 0 : 0)) / questions.length) * 100); 
-      // Note: Score state is already updated in handleOptionSelect, so we just pass the current state score.
-      // Wait, let's be careful. setScore is async. 
-      // safer to just recalculate strictly from answers object if we wanted to be pure, but state is fine if we wait.
-      // Actually, since we are moving to "next" AFTER the user sees the result, score is stable.
-      
       onComplete({
         score: score, 
         percentage: Math.round((score / questions.length) * 100),
@@ -48,23 +51,51 @@ export default function Quiz({ onComplete }) {
     }
   };
 
+  // Progress as a "Station" Indicator
   const progress = ((currentQuestionIndex) / questions.length) * 100;
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 z-20 relative">
-      {/* Progress Bar */}
-      <div className="w-full bg-slate-800 h-2 rounded-full mb-8 overflow-hidden">
-        <motion.div 
-          className="h-full bg-gradient-to-r from-mumbai-orange to-mumbai-pink"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5 }}
-        />
-      </div>
+      
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            className="fixed top-20 left-0 w-full flex justify-center z-50 pointer-events-none"
+          >
+            <div className="bg-mumbai-orange text-black font-black uppercase tracking-widest px-6 py-2 rounded-full shadow-lg transform rotate-[-2deg]">
+              {toast}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="mb-4 flex justifying-between items-center text-slate-400 text-sm font-semibold uppercase tracking-wider">
-        <span>Question {currentQuestionIndex + 1} / {questions.length}</span>
-        <span className="ml-auto">Score: {score}</span>
+      {/* Local Train Line Progress */}
+      <div className="mb-8 relative">
+        <div className="flex justify-between text-xs text-slate-500 font-bold uppercase tracking-widest mb-2">
+           <span>Churchgate</span>
+           <span>Virar</span>
+        </div>
+        <div className="relative w-full h-3 bg-slate-800 rounded-full overflow-hidden">
+          {/* Track Lines */}
+          <div className="absolute inset-0 w-full h-full opacity-20 bg-[repeating-linear-gradient(90deg,transparent,transparent_10px,#000_10px,#000_12px)]"></div>
+          
+          <motion.div 
+            className="h-full bg-gradient-to-r from-mumbai-orange to-mumbai-pink relative"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.5 }}
+          >
+             {/* Train Head Indicator */}
+             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-4 h-4 bg-white rounded-full border-4 border-mumbai-pink shadow-[0_0_10px_rgba(225,0,152,0.8)]"></div>
+          </motion.div>
+        </div>
+        <div className="text-center mt-2 text-mumbai-yellow font-mono text-sm">
+           Station: {currentQuestionIndex + 1} / {questions.length}
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
@@ -76,9 +107,14 @@ export default function Quiz({ onComplete }) {
           transition={{ duration: 0.3 }}
           className="bg-slate-800/50 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-3xl shadow-2xl"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">
-            {currentQuestion.text}
-          </h2>
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+              {currentQuestion.text}
+            </h2>
+            <div className="bg-white/5 p-2 rounded-lg shrink-0">
+               <span className="text-2xl">🤔</span>
+            </div>
+          </div>
 
           <div className="space-y-3">
             {currentQuestion.options.map((option, index) => {
@@ -90,9 +126,9 @@ export default function Quiz({ onComplete }) {
               
               if (showResult) {
                 if (isCorrect) {
-                  buttonStyle = "w-full text-left p-4 rounded-xl border border-green-500/50 bg-green-500/20 text-green-200";
+                  buttonStyle = "w-full text-left p-4 rounded-xl border-2 border-green-500/50 bg-green-500/20 text-green-200 shadow-[0_0_20px_rgba(34,197,94,0.3)]";
                 } else if (isSelected) {
-                  buttonStyle = "w-full text-left p-4 rounded-xl border border-red-500/50 bg-red-500/20 text-red-200";
+                  buttonStyle = "w-full text-left p-4 rounded-xl border-2 border-red-500/50 bg-red-500/20 text-red-200";
                 } else {
                   buttonStyle = "w-full text-left p-4 rounded-xl border border-white/5 bg-white/5 opacity-50";
                 }
@@ -106,15 +142,15 @@ export default function Quiz({ onComplete }) {
                   className={buttonStyle}
                 >
                   <div className="flex items-center">
-                    <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-4 text-sm font-bold">
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 text-sm font-bold ${showResult && isCorrect ? 'bg-green-500 text-black' : 'bg-white/10'}`}>
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className="text-lg">{option}</span>
+                    <span className="text-lg font-medium">{option}</span>
                     {showResult && isCorrect && (
-                       <span className="ml-auto text-green-400">✓</span>
+                       <span className="ml-auto text-green-400 text-xl">✓</span>
                     )}
                     {showResult && isSelected && !isCorrect && (
-                       <span className="ml-auto text-red-400">✗</span>
+                       <span className="ml-auto text-red-400 text-xl">✗</span>
                     )}
                   </div>
                 </button>
@@ -130,16 +166,16 @@ export default function Quiz({ onComplete }) {
                 animate={{ height: 'auto', opacity: 1 }}
                 className="overflow-hidden mt-6 pt-6 border-t border-white/10"
               >
-                <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl mb-6">
-                  <p className="text-blue-200 text-sm">
-                    <span className="font-bold block mb-1">💡 Did you know?</span>
+                <div className="bg-mumbai-sky/10 border border-mumbai-sky/20 p-4 rounded-xl mb-6">
+                  <p className="text-mumbai-sky text-sm">
+                    <span className="font-bold block mb-1 uppercase tracking-wider">💡 Gyaan (Knowledge)</span>
                     {currentQuestion.explanation}
                   </p>
                 </div>
                 
                 <div className="flex justify-end">
-                  <Button onClick={handleNext}>
-                    {isLastQuestion ? "Finish Quiz" : "Next Question →"}
+                  <Button onClick={handleNext} className="bg-gradient-to-r from-mumbai-orange to-mumbai-pink hover:from-mumbai-pink hover:to-mumbai-orange">
+                    {isLastQuestion ? "Finish Quiz" : "Pudhe Chala (Next) →"}
                   </Button>
                 </div>
               </motion.div>
