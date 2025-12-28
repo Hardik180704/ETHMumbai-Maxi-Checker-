@@ -7,6 +7,8 @@ export function useWallet() {
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState(null);
 
+  const [balance, setBalance] = useState(null);
+
   const checkConnection = async () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
@@ -42,16 +44,22 @@ export function useWallet() {
   const handleAccountChanged = async (newAccount) => {
     setAccount(newAccount);
     setEnsName(null); // Reset ENS while fetching
+    setBalance(null); // Reset balance
     
-    // Try to resolve ENS
+    const provider = new ethers.BrowserProvider(window.ethereum);
+
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      // Fetch Balance
+      const bal = await provider.getBalance(newAccount);
+      setBalance(ethers.formatEther(bal));
+
+      // Resolve ENS
       const name = await provider.lookupAddress(newAccount);
       if (name) {
         setEnsName(name);
       }
     } catch (err) {
-      console.log("ENS lookup failed or no ENS found:", err);
+      console.log("Error fetching wallet data:", err);
     }
   };
 
@@ -74,5 +82,5 @@ export function useWallet() {
     };
   }, []);
 
-  return { account, ensName, connectWallet, isConnecting, error };
+  return { account, ensName, balance, connectWallet, isConnecting, error };
 }

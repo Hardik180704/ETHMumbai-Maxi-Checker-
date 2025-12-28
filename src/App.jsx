@@ -44,9 +44,6 @@ function App() {
     </Layout>
   );
 }
-      </AnimatePresence>
-    </Layout>
-  );
-}
+
 
 export default App;

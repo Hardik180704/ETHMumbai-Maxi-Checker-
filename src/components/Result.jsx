@@ -109,6 +109,24 @@ export default function Result({ scoreData, wallet, onRestart }) {
         <p className="text-xl text-slate-300">
            Score: {scoreData.score} / {scoreData.total} <span className="text-mumbai-orange">({scoreData.percentage}%)</span>
         </p>
+
+        {/* Vada Pav Index Display */}
+        {wallet?.balance && (
+           <motion.div 
+             initial={{ opacity: 0, y: 10 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 0.8 }}
+             className="mt-4 bg-white/10 backdrop-blur-md inline-block px-6 py-3 rounded-2xl border border-white/10"
+           >
+              <p className="text-sm text-slate-400 uppercase tracking-widest font-bold mb-1">Your Vada Pav Power</p>
+              <div className="flex items-center gap-2 justify-center">
+                 <span className="text-3xl">🍔</span>
+                 <span className="text-2xl font-mono font-bold text-mumbai-yellow">
+                   {Math.floor((parseFloat(wallet.balance) * 200000) / 20).toLocaleString()} <span className="text-sm text-white/60">Vada Pavs</span>
+                 </span>
+              </div>
+           </motion.div>
+        )}
       </motion.div>
 
       {/* Card Preview Area */}

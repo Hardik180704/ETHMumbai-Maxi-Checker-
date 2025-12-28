@@ -7,6 +7,14 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
   
   const userName = wallet?.ensName || (wallet?.account ? wallet.account.slice(0, 6) + "..." + wallet.account.slice(-4) : "Anon Maxi");
+  
+  // Vada Pav Logic
+  const ethPrice = 200000; // Mock price INR
+  const vadaPavPrice = 20;
+  const vadaPavCount = wallet?.balance ? Math.floor((parseFloat(wallet.balance) * ethPrice) / vadaPavPrice) : 0;
+  
+  const isWhale = wallet?.balance && parseFloat(wallet.balance) > 1.0;
+  const isStudent = wallet?.balance && parseFloat(wallet.balance) < 0.01;
 
   return (
     <div 
@@ -21,6 +29,29 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
       
       {/* Noise Texture Overlay */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 mix-blend-overlay z-0 pointer-events-none"></div>
+
+      {/* STAMPS */}
+      {isWhale && (
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-90 mix-blend-color-dodge pointer-events-none">
+          <div className="border-[6px] border-white rounded-full w-32 h-32 flex items-center justify-center -rotate-12 bg-white/10 backdrop-blur-md shadow-2xl">
+             <div className="text-center">
+               <span className="block text-4xl">🐋</span>
+               <span className="block text-[10px] font-black uppercase tracking-widest mt-1">SoBo Whale</span>
+             </div>
+          </div>
+        </div>
+      )}
+
+      {isStudent && (
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-80 mix-blend-overlay pointer-events-none">
+          <div className="border-[4px] border-white/50 rounded-lg w-32 h-20 flex items-center justify-center rotate-6 bg-red-500/20 backdrop-blur-sm">
+             <div className="text-center text-white">
+               <span className="block text-2xl">🎒</span>
+               <span className="block text-[10px] font-bold uppercase tracking-wide">Student Pass</span>
+             </div>
+          </div>
+        </div>
+      )}
 
       <div className="relative z-10 w-full h-full bg-slate-900/40 backdrop-blur-md rounded-2xl border border-white/20 p-8 flex flex-col justify-between">
         
@@ -53,6 +84,14 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
             {tier.name}
           </div>
           <p className="text-slate-200 mt-2 font-medium italic max-w-sm">"{tier.description}"</p>
+          
+          {wallet?.balance && (
+            <div className="mt-4 px-4 py-1 bg-black/30 rounded-full border border-white/10 flex items-center gap-2">
+              <span className="text-lg">🍔</span>
+              <span className="text-xs uppercase tracking-widest font-bold text-mumbai-orange">Purchasing Power:</span>
+              <span className="text-sm font-mono font-bold">{vadaPavCount.toLocaleString()} VPs</span>
+            </div>
+          )}
         </div>
 
         {/* Footer */}
