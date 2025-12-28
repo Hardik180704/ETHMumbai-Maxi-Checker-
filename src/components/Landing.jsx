@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Train, Wallet, ArrowRight } from 'lucide-react';
 import Button from './Button';
 
-export default function Landing({ onStart }) {
+export default function Landing({ onStart, wallet }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] w-full max-w-6xl mx-auto px-4 relative z-20">
       
@@ -54,9 +54,9 @@ export default function Landing({ onStart }) {
               <Train className="w-5 h-5" />
               Pakad Local (Start)
             </Button>
-            <Button variant="secondary" onClick={() => alert("Wallet connection lines are busy, try again later via Sea Link!")}>
+            <Button variant="secondary" onClick={wallet?.connectWallet} disabled={wallet?.isConnecting || wallet?.account}>
               <Wallet className="w-5 h-5" />
-              Jod Wallet
+              {wallet?.isConnecting ? "Connecting..." : wallet?.account ? (wallet.ensName || wallet.account.slice(0,6) + "...") : "Jod Wallet"}
             </Button>
           </motion.div>
 

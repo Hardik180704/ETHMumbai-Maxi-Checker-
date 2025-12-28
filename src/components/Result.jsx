@@ -7,7 +7,7 @@ import Button from './Button';
 import MaxiCard from './MaxiCard';
 import { getTier } from '../data/tiers';
 
-export default function Result({ scoreData, onRestart }) {
+export default function Result({ scoreData, wallet, onRestart }) {
   const cardRef = useRef(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [highScores, setHighScores] = useState([]);
@@ -125,7 +125,7 @@ export default function Result({ scoreData, onRestart }) {
         >
           {/* Wrapper to handle responsive scaling of the fixed-size card */}
           <div className="origin-top transform scale-[0.55] sm:scale-[0.6] md:scale-[0.8] lg:scale-100 p-2 border-2 border-white/5 rounded-[2rem]">
-             <MaxiCard ref={cardRef} scoreData={scoreData} />
+             <MaxiCard ref={cardRef} scoreData={scoreData} wallet={wallet} />
           </div>
         </motion.div>
       </div>

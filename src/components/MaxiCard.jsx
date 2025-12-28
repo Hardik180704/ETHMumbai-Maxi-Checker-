@@ -1,10 +1,12 @@
 import { forwardRef } from 'react';
 import { getTier } from '../data/tiers';
 
-const MaxiCard = forwardRef(({ scoreData, userName = "Anon" }, ref) => {
+const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
   const { percentage, score, total } = scoreData;
   const tier = getTier(percentage);
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  
+  const userName = wallet?.ensName || (wallet?.account ? wallet.account.slice(0, 6) + "..." + wallet.account.slice(-4) : "Anon Maxi");
 
   return (
     <div 
@@ -33,8 +35,15 @@ const MaxiCard = forwardRef(({ scoreData, userName = "Anon" }, ref) => {
               </h1>
             </div>
           </div>
-          <div className="bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
-            <span className="text-xl font-bold font-mono">{score}/{total}</span>
+          <div className="flex flex-col items-end gap-2">
+            <div className="bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+              <span className="text-xl font-bold font-mono">{score}/{total}</span>
+            </div>
+             {wallet?.account && (
+               <div className="text-[10px] font-mono text-green-300 bg-green-900/40 px-2 py-0.5 rounded-full border border-green-500/30 uppercase tracking-wider">
+                 ● Verified
+               </div>
+             )}
           </div>
         </div>
 
@@ -49,12 +58,12 @@ const MaxiCard = forwardRef(({ scoreData, userName = "Anon" }, ref) => {
         {/* Footer */}
         <div className="flex justify-between items-end border-t border-white/10 pt-4">
           <div className="flex flex-col">
-            <span className="text-xs uppercase tracking-wider opacity-60">Verified User</span>
+            <span className="text-xs uppercase tracking-wider opacity-60">Holder Name</span>
             <span className="font-bold text-lg truncate max-w-[200px]">{userName}</span>
           </div>
           
           <div className="flex flex-col items-end">
-             <span className="text-xs uppercase tracking-wider opacity-60">Date</span>
+             <span className="text-xs uppercase tracking-wider opacity-60">Date Issued</span>
              <span className="font-bold">{date}</span>
           </div>
         </div>
