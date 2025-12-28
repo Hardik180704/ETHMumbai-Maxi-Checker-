@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Layout from './components/Layout';
 import Landing from './components/Landing';
+import Quiz from './components/Quiz';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [gameState, setGameState] = useState('landing'); // landing, quiz, result
+  const [scoreData, setScoreData] = useState(null);
+
 
   return (
     <Layout>
@@ -14,16 +17,10 @@ function App() {
         )}
         
         {gameState === 'quiz' && (
-          <div key="quiz" className="text-center text-2xl">
-            {/* Placeholder for Quiz Component */}
-            <p>Quiz Component Coming Soon...</p>
-            <button 
-              onClick={() => setGameState('result')}
-              className="mt-4 px-4 py-2 bg-blue-500 rounded"
-            >
-              Skip to Result
-            </button>
-          </div>
+          <Quiz key="quiz" onComplete={(result) => {
+            setScoreData(result);
+            setGameState('result');
+          }} />
         )}
 
         {gameState === 'result' && (
