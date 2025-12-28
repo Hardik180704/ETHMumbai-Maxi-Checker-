@@ -30,21 +30,21 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
       {/* Noise Texture Overlay */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 mix-blend-overlay z-0 pointer-events-none"></div>
 
-      {/* STAMPS */}
+      {/* STAMPS - blend modes removed for export stability */}
       {isWhale && (
-        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-90 mix-blend-color-dodge pointer-events-none">
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-90 pointer-events-none">
           <div className="border-[6px] border-white rounded-full w-32 h-32 flex items-center justify-center -rotate-12 bg-white/10 backdrop-blur-md shadow-2xl">
              <div className="text-center">
                <span className="block text-4xl">🐋</span>
-               <span className="block text-[10px] font-black uppercase tracking-widest mt-1">SoBo Whale</span>
+               <span className="block text-[10px] font-black uppercase tracking-widest mt-1 text-white">SoBo Whale</span>
              </div>
           </div>
         </div>
       )}
 
       {isStudent && (
-        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-80 mix-blend-overlay pointer-events-none">
-          <div className="border-[4px] border-white/50 rounded-lg w-32 h-20 flex items-center justify-center rotate-6 bg-red-500/20 backdrop-blur-sm">
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-20 opacity-90 pointer-events-none">
+          <div className="border-[4px] border-white/50 rounded-lg w-32 h-20 flex items-center justify-center rotate-6 bg-red-500/40 backdrop-blur-sm shadow-xl">
              <div className="text-center text-white">
                <span className="block text-2xl">🎒</span>
                <span className="block text-[10px] font-bold uppercase tracking-wide">Student Pass</span>
@@ -53,25 +53,25 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
         </div>
       )}
 
-      <div className="relative z-10 w-full h-full bg-slate-900/40 backdrop-blur-md rounded-2xl border border-white/20 p-8 flex flex-col justify-between">
+      <div className="relative z-10 w-full h-full bg-slate-900/60 backdrop-blur-md rounded-2xl border border-white/20 p-8 flex flex-col justify-between">
         
         {/* Header */}
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
-            <img src="/ethmumbai-logo.png" alt="Logo" className="w-12 h-12" />
+            <img src="/ethmumbai-logo.png" alt="Logo" className="w-12 h-12 object-contain" />
             <div>
-              <h3 className="text-sm font-bold tracking-widest uppercase opacity-70">ETHMumbai 2024</h3>
-              <h1 className="text-3xl font-black tracking-tighter mt-1 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
+              <h3 className="text-sm font-bold tracking-widest uppercase opacity-80 text-white">ETHMumbai 2024</h3>
+              <h1 className="text-3xl font-black tracking-tighter mt-1 text-white drop-shadow-md">
                 Maxi Checker
               </h1>
             </div>
           </div>
           <div className="flex flex-col items-end gap-2">
             <div className="bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
-              <span className="text-xl font-bold font-mono">{score}/{total}</span>
+              <span className="text-xl font-bold font-mono text-white">{score}/{total}</span>
             </div>
              {wallet?.account && (
-               <div className="text-[10px] font-mono text-green-300 bg-green-900/40 px-2 py-0.5 rounded-full border border-green-500/30 uppercase tracking-wider">
+               <div className="text-[10px] font-mono text-green-300 bg-green-900/60 px-2 py-0.5 rounded-full border border-green-500/30 uppercase tracking-wider shadow-sm">
                  ● Verified
                </div>
              )}
@@ -80,7 +80,7 @@ const MaxiCard = forwardRef(({ scoreData, wallet }, ref) => {
 
         {/* Center Content */}
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <div className={`text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r ${tier.color} drop-shadow-2xl`}>
+          <div className="text-5xl md:text-6xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-tight">
             {tier.name}
           </div>
           <p className="text-slate-200 mt-2 font-medium italic max-w-sm">"{tier.description}"</p>
