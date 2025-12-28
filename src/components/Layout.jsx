@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       </div>
 
       <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none z-0"></div>
-      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 z-0 pointer-events-none"></div>
+      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-[#240046] via-[#10002b] to-[#240046] z-0 pointer-events-none"></div>
       
       <main className="relative z-10 container mx-auto px-4 py-8 flex flex-col items-center justify-center min-h-screen">
         {children}

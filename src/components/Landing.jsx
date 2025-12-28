@@ -4,7 +4,7 @@ import Button from './Button';
 
 export default function Landing({ onStart, wallet }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] w-full max-w-6xl mx-auto px-4 relative z-20">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] w-full max-w-6xl mx-auto px-4 relative z-20 py-8 md:py-0">
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
         
@@ -22,16 +22,19 @@ export default function Landing({ onStart, wallet }) {
             ETHMumbai 2024 Edition
           </motion.div>
 
+
           <motion.h1 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black leading-tight tracking-normal"
+            className="relative z-30 flex flex-col items-center md:items-start font-black leading-none tracking-normal"
           >
-            <span className="text-white drop-shadow-lg font-desi tracking-wide">आमची</span>{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#FF5E62] font-display tracking-tighter">Web3</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E10098] to-[#8E2DE2] font-desi tracking-wide">
+            <div className="flex flex-row flex-wrap justify-center md:justify-start items-baseline gap-2 md:gap-3">
+               <span className="text-white drop-shadow-xl font-desi tracking-wide text-5xl sm:text-6xl md:text-8xl">आमची</span>
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#FF416C] font-display tracking-tighter text-6xl sm:text-7xl md:text-8xl">Web3</span>
+            </div>
+            
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFCC00] to-[#FFD700] font-desi tracking-wide text-5xl sm:text-6xl md:text-8xl mt-1 md:mt-0 pb-2 md:pb-4 pt-2 md:pt-4 leading-relaxed drop-shadow-2xl filter contrast-125">
               मुंबई
             </span>
           </motion.h1>
@@ -65,7 +68,7 @@ export default function Landing({ onStart, wallet }) {
                    className={wallet?.account ? "bg-green-600/20 border-green-500/50 text-green-400" : ""}
                 >
                   <Wallet className="w-5 h-5" />
-                  {wallet?.isConnecting ? "Connecting..." : wallet?.account ? (wallet.ensName || wallet.account.slice(0,6) + "..." + wallet.account.slice(-4)) : "Jod Wallet"}
+                  {wallet?.isConnecting ? "Connecting..." : wallet?.account ? (wallet.ensName || wallet.account.slice(0,6) + "..." + wallet.account.slice(-4)) : "Connect Wallet"}
                 </Button>
               </div>
 
