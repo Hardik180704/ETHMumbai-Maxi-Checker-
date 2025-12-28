@@ -16,8 +16,8 @@ export default function Landing({ onStart }) {
             className="inline-flex items-center gap-2 bg-mumbai-orange/10 backdrop-blur-md px-4 py-2 rounded-full border border-mumbai-orange/20 text-mumbai-orange font-bold text-sm tracking-wide uppercase"
           >
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-mumbai-orange opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-mumbai-orange"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
             </span>
             ETHMumbai 2024 Edition
           </motion.div>

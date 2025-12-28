@@ -24,11 +24,14 @@ const MaxiCard = forwardRef(({ scoreData, userName = "Anon" }, ref) => {
         
         {/* Header */}
         <div className="flex justify-between items-start">
-          <div>
-            <h3 className="text-sm font-bold tracking-widest uppercase opacity-70">ETHMumbai 2024</h3>
-            <h1 className="text-3xl font-black tracking-tighter mt-1 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-              Maxi Checker
-            </h1>
+          <div className="flex items-center gap-4">
+            <img src="/ethmumbai-logo.png" alt="Logo" className="w-12 h-12" />
+            <div>
+              <h3 className="text-sm font-bold tracking-widest uppercase opacity-70">ETHMumbai 2024</h3>
+              <h1 className="text-3xl font-black tracking-tighter mt-1 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
+                Maxi Checker
+              </h1>
+            </div>
           </div>
           <div className="bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
             <span className="text-xl font-bold font-mono">{score}/{total}</span>

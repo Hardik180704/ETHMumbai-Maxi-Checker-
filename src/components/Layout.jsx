@@ -5,6 +5,11 @@ export default function Layout({ children }) {
       {/* Kaali-Peeli Taxi Pattern Top Border */}
       <div className="fixed top-0 left-0 w-full h-2 z-50 bg-pattern-taxi opacity-80"></div>
 
+      {/* Header Logo */}
+      <div className="fixed top-6 left-6 z-40">
+        <img src="/ethmumbai-logo.png" alt="ETHMumbai Logo" className="w-16 h-16 drop-shadow-lg hover:scale-110 transition-transform" />
+      </div>
+
       <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none z-0"></div>
       <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 z-0 pointer-events-none"></div>
       
