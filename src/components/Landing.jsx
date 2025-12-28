@@ -13,13 +13,13 @@ export default function Landing({ onStart, wallet }) {
           <motion.div 
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="inline-flex items-center gap-2 bg-mumbai-orange/10 backdrop-blur-md px-4 py-2 rounded-full border border-mumbai-orange/20 text-mumbai-orange font-bold text-sm tracking-wide uppercase"
+            className="inline-flex items-center gap-2 bg-mumbai-yellow/10 backdrop-blur-md px-4 py-2 rounded-full border border-mumbai-yellow/50 text-mumbai-yellow font-black font-display tracking-widest uppercase shadow-[0_0_10px_rgba(255,204,0,0.3)]"
           >
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            ETHMumbai 2024 Edition
+            Mumbai Mainnet • Active
           </motion.div>
 
 
