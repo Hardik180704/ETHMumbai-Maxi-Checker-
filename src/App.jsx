@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Layout from './components/Layout';
+import Landing from './components/Landing';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [gameState, setGameState] = useState('landing'); // landing, quiz, result
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout>
+      <AnimatePresence mode="wait">
+        {gameState === 'landing' && (
+          <Landing key="landing" onStart={() => setGameState('quiz')} />
+        )}
+        
+        {gameState === 'quiz' && (
+          <div key="quiz" className="text-center text-2xl">
+            {/* Placeholder for Quiz Component */}
+            <p>Quiz Component Coming Soon...</p>
+            <button 
+              onClick={() => setGameState('result')}
+              className="mt-4 px-4 py-2 bg-blue-500 rounded"
+            >
+              Skip to Result
+            </button>
+          </div>
+        )}
+
+        {gameState === 'result' && (
+          <div key="result" className="text-center">
+             {/* Placeholder for Result Component */}
+            <h2 className="text-4xl">Result Screen</h2>
+            <button 
+              onClick={() => setGameState('landing')}
+              className="mt-4 px-4 py-2 bg-white/10 rounded"
+            >
+              Restart
+            </button>
+          </div>
+        )}
+      </AnimatePresence>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
