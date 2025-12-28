@@ -50,14 +50,40 @@ export default function Landing({ onStart, wallet }) {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4"
           >
-            <Button onClick={onStart} variant="primary" className="shadow-mumbai-pink/25 shadow-xl uppercase tracking-widest">
-              <Train className="w-5 h-5" />
-              Pakad Local (Start)
-            </Button>
-            <Button variant="secondary" onClick={wallet?.connectWallet} disabled={wallet?.isConnecting || wallet?.account}>
-              <Wallet className="w-5 h-5" />
-              {wallet?.isConnecting ? "Connecting..." : wallet?.account ? (wallet.ensName || wallet.account.slice(0,6) + "...") : "Jod Wallet"}
-            </Button>
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <div className="flex gap-4">
+                <Button onClick={onStart} variant="primary" className="shadow-mumbai-pink/25 shadow-xl uppercase tracking-widest">
+                  <Train className="w-5 h-5" />
+                  Pakad Local (Start)
+                </Button>
+                <Button 
+                   variant={wallet?.account ? "primary" : "secondary"} 
+                   onClick={wallet?.connectWallet} 
+                   disabled={wallet?.isConnecting || wallet?.account}
+                   className={wallet?.account ? "bg-green-600/20 border-green-500/50 text-green-400" : ""}
+                >
+                  <Wallet className="w-5 h-5" />
+                  {wallet?.isConnecting ? "Connecting..." : wallet?.account ? (wallet.ensName || wallet.account.slice(0,6) + "..." + wallet.account.slice(-4)) : "Jod Wallet"}
+                </Button>
+              </div>
+
+               {/* Immediate Wallet Feedback */}
+               {wallet?.balance && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="bg-white/5 border border-white/10 p-3 rounded-xl flex items-center gap-3 backdrop-blur-md"
+                  >
+                     <div className="bg-mumbai-orange/20 p-2 rounded-lg">🍔</div>
+                     <div>
+                        <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Wallet Value</p>
+                        <p className="text-sm font-bold text-mumbai-yellow">
+                          {Math.floor((parseFloat(wallet.balance) * 200000) / 20).toLocaleString()} Vada Pavs
+                        </p>
+                     </div>
+                  </motion.div>
+               )}
+            </div>
           </motion.div>
 
           <motion.div 
