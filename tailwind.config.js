@@ -22,7 +22,8 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'], // For that poster feel
+        display: ['Impact', 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif'],
+        desi: ['"Yatra One"', 'system-ui', 'cursive'], // For Hindi text
       },
       animation: {
         'wiggle': 'wiggle 1s ease-in-out infinite',

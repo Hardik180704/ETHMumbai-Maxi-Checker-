@@ -26,13 +26,13 @@ export default function Landing({ onStart, wallet }) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black leading-tight tracking-tighter"
+            className="text-6xl md:text-8xl font-black leading-tight tracking-normal"
           >
-            <span className="text-white drop-shadow-lg">Aamchi</span>{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#FF5E62]">Web3</span>
+            <span className="text-white drop-shadow-lg font-desi tracking-wide">आमची</span>{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] to-[#FF5E62] font-display tracking-tighter">Web3</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E10098] to-[#8E2DE2]">
-              Mumbai
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E10098] to-[#8E2DE2] font-desi tracking-wide">
+              मुंबई
             </span>
           </motion.h1>
 
