@@ -68,9 +68,10 @@ export default function Result({ scoreData, wallet, onRestart }) {
       await new Promise(resolve => setTimeout(resolve, 100));
 
       const canvas = await html2canvas(cardRef.current, {
-        scale: 2, // High resolution
-        backgroundColor: null,
+        scale: 5, // Ultra Resolution
         useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
       });
 
       const image = canvas.toDataURL("image/png");
