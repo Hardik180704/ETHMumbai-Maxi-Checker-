@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Layout from './components/Layout';
 import Landing from './components/Landing';
 import Quiz from './components/Quiz';
+import Result from './components/Result';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {
@@ -23,17 +24,15 @@ function App() {
           }} />
         )}
 
-        {gameState === 'result' && (
-          <div key="result" className="text-center">
-             {/* Placeholder for Result Component */}
-            <h2 className="text-4xl">Result Screen</h2>
-            <button 
-              onClick={() => setGameState('landing')}
-              className="mt-4 px-4 py-2 bg-white/10 rounded"
-            >
-              Restart
-            </button>
-          </div>
+        {gameState === 'result' && scoreData && (
+          <Result 
+            key="result" 
+            scoreData={scoreData} 
+            onRestart={() => {
+              setScoreData(null);
+              setGameState('landing');
+            }}
+          />
         )}
       </AnimatePresence>
     </Layout>
